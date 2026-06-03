@@ -1,0 +1,41 @@
+{
+	"FileVersion": 1,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Angelscript GameplayTags",
+	"Description": "GameplayTags support for Unreal Engine Angelscript.",
+	"Category": "Scripting",
+	"CreatedBy": "Hazelight Games",
+	"CreatedByURL": "http://angelscript.hazelight.se",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EnabledByDefault": false,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false,
+
+	"Modules": [
+		{
+			"Name": "AngelscriptGameplayTags",
+			"Type": "Runtime",
+			"LoadingPhase": "PostDefault"
+		},
+		{
+			"Name": "AngelscriptGameplayTagsEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostDefault"
+		},
+		{
+			"Name": "AngelscriptGameplayTagsTest",
+			"Type": "Editor",
+			"LoadingPhase": "PostDefault"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Angelscript",
+			"Enabled": true
+		}
+	]
+}
