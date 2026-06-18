@@ -310,7 +310,7 @@ int GPTag_RequestNoneInvalid()
 		}
 
 		const FString TagName = AllTags.First().ToString().ReplaceCharWithEscapedChar();
-		FString Script = FString::Printf(TEXT(R"(
+		FString Script = TEXT(R"(
 int GPTagContainer_EmptyIsEmpty()
 {
 	FGameplayTagContainer EmptyDefault;
@@ -394,7 +394,7 @@ int GPTagContainer_Reset()
 	Combined.Reset();
 	return Combined.IsEmpty() ? 1 : 0;
 }
-)"), *TagName);
+)");
 		Script.ReplaceInline(TEXT("__TAG_NAME__"), *TagName);
 
 		FScopedAngelscriptModule Mod(*TestRunner, Engine, TEXT("ASGameplayTag_Container"), Script);
@@ -459,7 +459,7 @@ int GPTagContainer_Reset()
 		if (NonEmptyContainer.HasTagExact(EmptyTag))          NativeMask |= (1 << 13);
 
 		const FString TagName = ValidTag.ToString().ReplaceCharWithEscapedChar();
-		FString Script = FString::Printf(TEXT(R"(
+		FString Script = TEXT(R"(
 int GPTagEmptyContract_ComputeMask()
 {
 	FGameplayTag ValidTag = FGameplayTag::RequestGameplayTag(FName("__TAG_NAME__"), true);
@@ -488,7 +488,7 @@ int GPTagEmptyContract_ComputeMask()
 
 	return ResultMask;
 }
-)"), *TagName);
+)");
 		Script.ReplaceInline(TEXT("__TAG_NAME__"), *TagName);
 
 		FScopedAngelscriptModule Mod(*TestRunner, Engine, TEXT("ASGameplayTag_EmptyContract"), Script);
@@ -519,7 +519,7 @@ int GPTagEmptyContract_ComputeMask()
 		}
 
 		const FString TagName = AllTags.First().ToString().ReplaceCharWithEscapedChar();
-		FString Script = FString::Printf(TEXT(R"(
+		FString Script = TEXT(R"(
 int GPTagQuery_EmptyDefault()
 {
 	FGameplayTagQuery EmptyDefault;
@@ -602,7 +602,7 @@ int GPTagQuery_MatchesQuery()
 	if (Tags.MatchesQuery(MatchNone)) return 0;
 	return 1;
 }
-)"), *TagName);
+)");
 		Script.ReplaceInline(TEXT("__TAG_NAME__"), *TagName);
 
 		FScopedAngelscriptModule Mod(*TestRunner, Engine, TEXT("ASGameplayTag_Query"), Script);
@@ -637,7 +637,7 @@ int GPTagQuery_MatchesQuery()
 		}
 
 		const FString TagName = AllTags.First().ToString().ReplaceCharWithEscapedChar();
-		FString Script = FString::Printf(TEXT(R"(
+		FString Script = TEXT(R"(
 int GPTagExact_GetTagName()
 {
 	FGameplayTag ValidTag = FGameplayTag::RequestGameplayTag(FName("__TAG_NAME__"), true);
@@ -668,7 +668,7 @@ int GPTagExact_RequestNoneEqualsEmpty()
 	FGameplayTag RequestedInvalid = FGameplayTag::RequestGameplayTag(NAME_None, false);
 	return (RequestedInvalid == FGameplayTag::EmptyTag) ? 1 : 0;
 }
-)"), *TagName);
+)");
 		Script.ReplaceInline(TEXT("__TAG_NAME__"), *TagName);
 
 		FScopedAngelscriptModule Mod(*TestRunner, Engine, TEXT("ASGameplayTag_ExactQuery"), Script);
