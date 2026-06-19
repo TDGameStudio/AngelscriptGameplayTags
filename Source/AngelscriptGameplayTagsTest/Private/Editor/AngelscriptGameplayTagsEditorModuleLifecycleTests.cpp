@@ -1,17 +1,16 @@
 #include "AngelscriptGameplayTagsEditorModule.h"
 
+#include "CQTest.h"
 #include "GameplayTagsModule.h"
-#include "Misc/AutomationTest.h"
 #include "Misc/ScopeExit.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(
-	FAngelscriptGameplayTagsEditorModuleReloadTagsDelegatesLifecycleTest,
-	"Angelscript.GameplayTags.Editor.Module.ReloadTagsDelegatesRegisterOnceAndUnbindOnShutdown",
-	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+#define TestFalse(...) Test.TestFalse(__VA_ARGS__)
+#define TestTrue(...) Test.TestTrue(__VA_ARGS__)
+#define TestEqual(...) Test.TestEqual(__VA_ARGS__)
 
-bool FAngelscriptGameplayTagsEditorModuleReloadTagsDelegatesLifecycleTest::RunTest(const FString& Parameters)
+static bool RunReloadTagsDelegatesRegisterOnceAndUnbindOnShutdown(FAutomationTestBase& Test)
 {
 	FAngelscriptGameplayTagsEditorModule Module;
 	bool bModuleStarted = false;
@@ -104,5 +103,19 @@ bool FAngelscriptGameplayTagsEditorModuleReloadTagsDelegatesLifecycleTest::RunTe
 		ReloadCallCount - ReloadCallCountBeforeShutdownBroadcasts,
 		0);
 }
+
+#undef TestFalse
+#undef TestTrue
+#undef TestEqual
+
+TEST_CLASS_WITH_FLAGS(FAngelscriptGameplayTagsEditorModuleLifecycleTests,
+	"Angelscript.GameplayTags.Editor.Module",
+	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+{
+	TEST_METHOD(ReloadTagsDelegatesRegisterOnceAndUnbindOnShutdown)
+	{
+		ASSERT_THAT(IsTrue(RunReloadTagsDelegatesRegisterOnceAndUnbindOnShutdown(*TestRunner)));
+	}
+};
 
 #endif
